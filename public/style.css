@@ -19,3 +19,44 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+html {
+  box-sizing: border-box;
+}
+
+.concept-container {
+  display: grid;
+  grid-template-columns: 20% 40% 40%;
+  justify-items: center;
+  border: 1px solid blue;
+  height: 650px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid gray;
+  width: 100%;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.drop-container {
+  width: 375px;
+  height: 550px;
+  border: 1px solid black;
+  display: grid;
+  grid-template-rows: 20% 40% 20%;
+  grid-row-gap: 2rem;
+  padding: 1rem;
+}
+
+.drop-area {
+  border: 1.5px dotted gray;
+}
