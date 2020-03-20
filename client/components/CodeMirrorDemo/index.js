@@ -9,28 +9,43 @@ import 'codemirror/mode/javascript/javascript'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 
+const styles = {
+  container: {
+    width: '80%',
+    height: '80%'
+  }
+}
 class CodeMirrorDemo extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      code: '//Code'
+      code: props.code || '//Code'
     }
     this.updateCode = this.updateCode.bind(this)
   }
   updateCode(newCode) {
     this.setState({code: newCode})
   }
-  ref = React.createRef()
+  // ref = React.createRef()
   render() {
+    console.log('instance is ', this.instance)
     const options = {lineNumbers: true, theme: 'material', mode: 'javascript'}
     return (
-      <div>
-        <h4>Code Mirror Goes Here</h4>
+      <div style={styles.container}>
+        <h4>Code Mirror</h4>
         <CodeMirror
+          editorDidMount={editor => {
+            this.instance = editor
+          }}
           value={this.state.code}
-          onChange={this.updateCode}
+          onBeforeChange={(editor, data, code) => {
+            this.setState({code})
+          }}
+          onChange={(editor, data, code) => {
+            console.log('controlled', {code})
+          }}
           options={options}
-          ref={self => (this.editor = self)}
+          // ref={editor}
         />
       </div>
     )

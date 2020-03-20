@@ -11,8 +11,8 @@ const isEmpty = obj => {
 }
 
 class DropZone extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       boxOneEl: {},
       boxTwoEl: {},
@@ -21,11 +21,21 @@ class DropZone extends Component {
     this.setDroppedElement = this.setDroppedElement.bind(this)
   }
 
+  getCodedElements() {
+    const keys = Object.keys(this.state)
+    const arr = []
+    keys.forEach(k => {
+      if (!isEmpty(this.state[k])) arr.push(this.state[k])
+    })
+    return arr
+  }
+
   setDroppedElement(el, boxKey) {
     console.log('calling setDroppedElement from Parent Component')
     this.setState({
       [boxKey]: el
     })
+    this.props.updateCode(this.getCodedElements())
   }
   render() {
     const {boxOneEl, boxTwoEl, boxThreeEl} = this.state
